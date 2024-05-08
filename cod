@@ -1,0 +1,83 @@
+#define BLYNK_TEMPLATE_ID "TMPL47fUH7LD2" 
+#define BLYNK_TEMPLATE_NAME "DHT"
+#define BLYNK_AUTH_TOKEN "JkQQrYSy4dORq9vktdATj6mXtKdiOnsa" 
+#define BLYNK_PRINT Serial
+#include <WiFi.h> 
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h> 
+#include "DHT.h"
+//#define DHTTYPE 11 
+#define DHTTYPE AM2301 
+#define DHTPIN 12
+char auth[] = "JkQQrYSy4dORq9vktdATj6mXtKdiOnsa"; 
+char ssid[] = "ETTI by Orange";
+char pass[] = "";
+DHT dht(DHTPIN, DHTTYPE);
+BlynkTimer timer;
+int ledPin1 = 13; 
+int ledPin2 = 14;
+int ledPin3 = 27;
+void sendSensor()
+{
+float h = dht.readHumidity();
+float t = dht.readTemperature(); // or dht.readTemperature(true) for Fahrenheit
+if (isnan(h) || isnan(t)) {
+Serial.println("Failed to read from DHT sensor!"); 
+return;
+}
+// se va aprinde un bec cand temperatura depaseste 10 grade 
+if( t>=10)
+{
+digitalWrite (26, HIGH) ;
+}
+//se vor aprinde doua becuri cand temperatura depaseste 20 de grade 
+if( t>=20)
+{
+digitalWrite (26, HIGH);
+digitalWrite (27, HIGH);
+}
+//se vor aprinde 3 becuri cand temperatura depaseste 30 de grade 
+if( t>=20)
+{
+digitalWrite (26, HIGH);
+digitalWrite (27, HIGH);
+digitalWrite (13, HIGH);
+}
+// You can send any value at any time.
+// Please don't send more that 10 values per second. 
+Blynk.virtualWrite(V0, t);
+Blynk.virtualWrite(V1, h);
+}
+/*pentru aprinderea becurilor folosind aplicatia vom decomenta aceasta segventa 
+BLYNK_WRITE(V4)//*
+{
+int pinValue1 = param.asInt(); 
+digitalWrite(ledPin1, pinValue1);
+}
+BLYNK_WRITE(V3)//*
+{
+int pinValue2 = param.asInt(); 
+digitalWrite(ledPin2, pinValue2);
+}
+BLYNK_WRITE(V2)//*
+{
+int pinValue3 = param.asInt(); 
+digitalWrite(ledPin3, pinValue3);
+}
+*/
+void setup()
+{
+// Debug console 
+Serial.begin(115200); 
+dht.begin();
+timer.setInterval(1000L, sendSensor); 
+Blynk.begin(auth, ssid, pass); 
+pinMode (ledPin1, OUTPUT);
+pinMode (ledPin2, OUTPUT); 
+pinMode (ledPin3, OUTPUT);
+}
+void loop()
+{
+Blynk.run();
+timer.run();
+}
