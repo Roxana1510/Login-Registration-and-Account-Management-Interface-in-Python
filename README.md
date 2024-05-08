@@ -1,8 +1,1 @@
-
-For the code to work, make sure you have the Python extension in your path and that you have the latest version of Python installed. Install the following in your terminal:
-
-pip install flask
-
-pip install Flask-SQLAlchemy
-
-pip install flask-login
+The project showcases my skills in using the Figma application. I've designed the interface of an online store that sells and delivers coffee and pastries, linking each frame to another to create a seamless and continuous experience.
