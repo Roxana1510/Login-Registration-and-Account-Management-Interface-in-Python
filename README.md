@@ -1,1 +1,1 @@
-The project showcases my skills in using the Figma application. I've designed the interface of an online store that sells and delivers coffee and pastries, linking each frame to another to create a seamless and continuous experience.
+Reading temperature and humidity using the DHT sensor and displaying it on a phone remotely through the Blynk app. The project is implemented using an ESP32 board.
