@@ -1,0 +1,25 @@
+Scopul proiectului:este de a ne arăta cunoștințele dobândite în cadrul cursului , astfel
+am reușit să citim cu ajutorul senzorului DHT temperatura și umiditatea și să o afișăm pe telefon 
+de la distanță prin aplicația Blynk.
+
+Bibliotecile utilizate: 
+- WiFi by Arduino
+- DTH sensor library by Adafruit
+- Blynk by Volodymyr Shymansky 
+- Ethernet by Arduino
+
+Legarea la ESP:
+Pin modul senzor Pin ESP32
+VCC +
+GND GND
+DO 12
+LED1 26
+LED2 27
+LED3 13
+
+Senzorul are 3 pini (+, out ,-)
+Conectăm senzorul de temperature și umiditate la pinul 12 pentru că are proprietatea 
+GPIO 12 (input/output) și ADC2_5(citire analogică)
+Conectăm LED1 la pinul 26 pentru că are proprietatea GPIO 21 (input/output) 
+Conectăm LED2 la pinul 27 pentru că are proprietatea GPIO 3 (input/output) 
+Conectăm LED3 la pinul 13 pentru că are proprietatea GPIO 13 (input/output)
